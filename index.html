@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b1018">
+  <meta name="description" content="Escape the Mainframe: an untimed AS ICT Chapter 1 revision adventure.">
+  <title>Escape the Mainframe | AS ICT</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
+  <script defer src="content.js"></script><script defer src="engine.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to mission</a>
+  <header class="topbar"><a class="brand" href="#" id="home" aria-label="Mission home"><span class="brand-icon">⌘</span><span>MAINFRAME<small>AS ICT · CHAPTER 01</small></span></a><div class="header-actions"><span class="status"><i></i> NO LOGIN NEEDED</span><button id="sound" aria-pressed="false" title="Toggle optional sound">Sound off</button><button id="guide">Field guide</button></div></header>
+  <div id="app"></div>
+  <footer><span>Learn. Investigate. Escape.</span><span>Revision practice, not an exam grade · No account needed</span></footer>
+  <dialog id="guide-dialog" aria-labelledby="guide-title"><div class="dialog-top"><h2 id="guide-title">Your field guide</h2><button id="close-guide">Close guide</button></div><p>Use Tab to move, Enter or Space to activate. Inspect evidence, build an answer and test it. There is no countdown. Hints and retries are always available.</p><p>Each solved puzzle earns 100 XP, minus 10 per earlier unsuccessful test and 10 for a hint, with a minimum of 50 XP. XP is a game reward, not a mark or grade.</p><h3>Exam command words</h3><p>These are revision guides. Follow the wording, context and mark allocation of the actual exam. The game practises the thinking behind these words, not full written exam responses.</p><dl id="glossary"></dl><p class="muted">Progress stays in this browser on this device. Clearing browser data removes it. Nothing is sent to a teacher or Google Sheet. On a shared computer, use “Clear my progress” when finished.</p><button id="reset" class="danger">Clear my progress</button></dialog>
+  <dialog id="reset-dialog" aria-labelledby="reset-title"><h2 id="reset-title">Start a new mission?</h2><p>This removes this game’s saved progress from this browser. Download your mission report first if you want to keep it.</p><div class="button-row"><button id="cancel-reset">Keep progress</button><button id="confirm-reset" class="danger">Clear and restart</button></div></dialog>
+  <noscript><p class="noscript">JavaScript is needed to run the puzzles. Enable it in your browser to start.</p></noscript>
+</body>
+</html>

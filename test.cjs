@@ -1,0 +1,12 @@
+const test=require('node:test');
+const assert=require('node:assert/strict');
+const Game=require('./engine');
+const {SECTORS,GLOSSARY}=require('./content');
+const tasks=SECTORS.flatMap(s=>s.tasks);
+test('content completeness',()=>{assert.equal(tasks.length,18);assert.equal(new Set(tasks.map(t=>t.id)).size,18);for(const t of tasks){assert.ok(t.evidence.length);assert.ok(GLOSSARY[t.command]);assert.ok(t.why);assert.ok(t.hint);}});
+test('all solutions pass and incomplete answers fail',()=>{for(const t of tasks){assert.equal(Game.check(t,t.answer),true,t.id);assert.equal(Game.check(t,t.type==='number'?'':[]),false,t.id);}});
+test('wrong answers fail',()=>{for(const t of tasks){const wrong=t.type==='number'?'999':t.type==='match'?t.answer.map(()=>'?'):t.type==='order'?[0,1,2,3]:[99];assert.equal(Game.check(t,wrong),false,t.id);}});
+test('multi order is irrelevant, sequence order matters',()=>{assert.equal(Game.check(tasks[2],[2,0]),true);assert.equal(Game.check(tasks[3],[0,3,1,2]),false);});
+test('locks open only after previous sectors are solved',()=>{const s=Game.fresh();assert.equal(Game.unlocked(SECTORS,s,0),true);assert.equal(Game.unlocked(SECTORS,s,1),false);for(const t of SECTORS[0].tasks)s.solved[t.id]=true;assert.equal(Game.unlocked(SECTORS,s,1),true);assert.equal(Game.unlocked(SECTORS,s,5),false);});
+test('XP has a floor and full mission maximum',()=>{const s=Game.fresh();for(const t of tasks){s.solved[t.id]=true;s.attempts[t.id]=1;}assert.equal(Game.xp(SECTORS,s),1800);for(const t of tasks){s.attempts[t.id]=100;s.hints[t.id]=true;}assert.equal(Game.xp(SECTORS,s),900);});
+test('corrupt storage is safe; valid progress resumes',()=>{assert.deepEqual(Game.restore('{broken',SECTORS),Game.fresh());const s=Game.fresh();s.started=true;s.solved.context=true;s.attempts.context=2;s.hints.context=true;assert.deepEqual(Game.restore(JSON.stringify(s),SECTORS),s);const bad=Game.restore(JSON.stringify({version:1,sector:999,task:-3,solved:{context:'yes'},attempts:{context:-1}}),SECTORS);assert.equal(bad.sector,0);assert.equal(bad.task,0);assert.deepEqual(bad.solved,{});});
