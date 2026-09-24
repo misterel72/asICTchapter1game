@@ -4,6 +4,8 @@ A self-contained AS ICT Chapter 1 revision escape-room game. Five sectors, 18 ch
 
 ## Play
 
+Live game: https://as-ict-escape-the-mainframe.netlify.app/
+
 Open `index.html` in a modern browser, keeping the other files alongside it, or deploy the folder as a static site. No installation, account, external font, API key, framework or build command is required. The downloaded folder runs offline. The hosted version needs internet to load; it does not install an offline cache.
 
 Use Tab to move and Enter/Space to activate controls. Select evidence records, choose answers, connect labels and build a processing sequence. Hints, unlimited retries and an exam command-word glossary are built in. Sound is optional and off by default. No countdown or reflex penalty.
@@ -49,4 +51,6 @@ Keep task IDs stable when changing wording to preserve progress. If changing the
 
 ## Release checks
 
-Seven automated logic tests pass. JavaScript syntax checks pass. Local browser visual preview was unavailable in the build environment. Before classroom release, test the published game at desktop and phone widths, play every puzzle type, reload midway, try a wrong answer and a hint, finish the boss, download a report and reset. Test with keyboard only and with the school's browser/network. No live hosting URL has yet been verified.
+Seven automated logic tests and JavaScript syntax checks pass. On 24 September 2026, the published Netlify game was played through all 18 challenges and the final boss in a desktop browser. Incomplete answers, wrong answers, hints, sector unlocking, saved progress after reload, the command-word glossary, completion report, plain-text report download and shared-device reset were verified. The report correctly recorded the deliberate retry and hint. Desktop visual inspection passed.
+
+Before the lesson, open the live link on a school computer to check local network access. Phone layout, a full keyboard-only run and classroom timing with pupils remain unverified.
