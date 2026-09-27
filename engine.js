@@ -1,6 +1,6 @@
 /* Pure game logic, also exercised by node:test. */
 const Game = {
-  fresh: () => ({version:1,started:false,sector:0,task:0,solved:{},attempts:{},hints:{},inspected:{},sound:false,finished:false}),
+  fresh: () => ({version:2,started:false,sector:0,task:0,solved:{},attempts:{},hints:{},inspected:{},notes:{},sound:false,finished:false}),
   check(task, response) {
     if (task.type === 'number') return String(response).trim() !== '' && Number.isFinite(Number(response)) && Math.abs(Number(response)-task.answer)<0.001;
     if (!Array.isArray(response)) return false;
@@ -11,7 +11,7 @@ const Game = {
   xp(sectors,state) {return sectors.flatMap(s=>s.tasks).reduce((sum,t)=>sum+(state.solved[t.id] ? Math.max(50,100-10*Math.max(0,(state.attempts[t.id]||1)-1)-(state.hints[t.id]?10:0)) : 0),0);},
   restore(raw,sectors) {
     try {
-      const data=JSON.parse(raw); if(!data || data.version!==1) return this.fresh();
+      const data=JSON.parse(raw); if(!data || data.version!==2) return this.fresh();
       const clean=this.fresh();
       for(const field of ['solved','attempts','hints','inspected']) {
         for(const t of sectors.flatMap(s=>s.tasks)) {
@@ -19,6 +19,9 @@ const Game = {
           if(field==='attempts' && Number.isSafeInteger(value) && value>=0) clean[field][t.id]=value;
           else if(field!=='attempts' && value===true) clean[field][t.id]=true;
         }
+      }
+      for(const t of sectors.flatMap(s=>s.tasks)) {
+        if(t.reasonPrompt && typeof data.notes?.[t.id] === 'string') clean.notes[t.id]=data.notes[t.id].slice(0,600);
       }
       clean.started=data.started===true; clean.sound=data.sound===true;
       clean.sector=Number.isInteger(data.sector) ? Math.max(0,Math.min(sectors.length-1,data.sector)) : 0;
