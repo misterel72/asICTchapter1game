@@ -51,6 +51,8 @@ The September challenge revision changes answers and puzzle types, so the save v
 
 ## Release checks
 
-The original version passed a complete live desktop play-through on 24 September 2026. The harder revision has nine automated checks covering answer rules, case assembly, progression, scoring and versioned saves. Live play-through of the revised deployment should be recorded after publication.
+The harder revision passed nine automated checks and a complete live desktop play-through on 27 September 2026. All 18 revised puzzles, the five-stage sequence, three structured cases, boss, hints, retries, versioned restart, saved written reasons after reload, downloaded report and shared-device reset were verified. The deliberately used retry and hint appeared in the final report. An attempted submission without a written reason did not use a test. The download was verified in the browser's shared download folder; the browser's download-event listener did not fire for the generated Blob.
+
+Before the lesson, open the live link on a school computer to check local network access. Mobile layout, a complete keyboard-only run and the revised pace with pupils remain unverified. Review a selection of pupils' downloaded explanations for evidence, an accurate limitation and a justified action; a long answer by itself does not show understanding.
 
 Before the lesson, open the live link on a school computer to check local network access. Phone layout, a full keyboard-only run and classroom timing with pupils remain unverified.
